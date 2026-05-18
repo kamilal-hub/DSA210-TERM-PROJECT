@@ -69,6 +69,7 @@
         .image-box img { 
             max-width: 100%; 
             border-radius: 4px;
+            border: 1px solid #444;
         }
         .caption { 
             color: #888; 
@@ -106,12 +107,12 @@
             <p>The ratings show a nearly normal distribution centered around 7.5 to 8.5, indicating a high baseline quality for the selected series. However, the audience size distribution is heavily right-skewed, meaning that while most shows have a moderate audience, a few mega-hits pull in millions of votes.</p>
             
             <div class="image-box">
-                [Buraya Scatter Plot (Figure 1) Gelecek]
+                <img src="result/Figure_1_Scatter_Plot.png" alt="IMDb Rating vs Audience Size Scatter Plot">
                 <div class="caption">Figure 1: Scatter plot showing the weak linear relationship between IMDb ratings and total user votes.</div>
             </div>
 
             <div class="image-box">
-                [Buraya Histogram ve Heatmap (Figure 2) Gelecek]
+                <img src="result/Figure_2_Distributions_Heatmap.png" alt="Distribution Histograms and Correlation Heatmap">
                 <div class="caption">Figure 2: Distribution histograms of ratings and votes alongside the overall correlation heatmap.</div>
             </div>
         </div>
@@ -120,13 +121,8 @@
             <h2>3. Hypothesis Testing</h2>
             <ul>
                 <li><strong>Rating vs. Audience Size (Pearson Correlation):</strong> Output is 0.30 (p-value = 0.000). There is a statistically significant but weak positive correlation. High ratings help, but do not guarantee mass popularity.</li>
-                <li><strong>Classic vs. Modern Series (T-Test):</strong> The p-value is 0.005. Older shows (< 2017) have a significantly higher average rating (8.17) than modern shows (7.94).</li>
+                <li><strong>Classic vs. Modern Series (T-Test):</strong> The p-value is 0.005. Older shows (&lt; 2017) have a significantly higher average rating (8.17) than modern shows (7.94).</li>
             </ul>
-
-            <div class="image-box">
-                [Buraya Test Çıktıları Terminal SS'i (Figure 3) Gelecek]
-                <div class="caption">Figure 3: Python terminal output displaying the results and p-values for both hypothesis tests.</div>
-            </div>
         </div>
 
         <div class="section">
@@ -134,7 +130,7 @@
             <p>Using unsupervised learning, I segmented the TV landscape into 4 distinct profiles. The Elbow Method indicated that k=4 was the optimal number of clusters.</p>
             
             <div class="image-box">
-                [Buraya Elbow Method Grafiği (Figure 4) Gelecek]
+                <img src="result/Figure_4_Elbow_Method.png" alt="Elbow Method Graph">
                 <div class="caption">Figure 4: Elbow method metric plot used to determine the optimal number of clusters (k=4).</div>
             </div>
 
@@ -147,13 +143,8 @@
             </ul>
 
             <div class="image-box">
-                [Buraya 4 Renkli K-Means Grafiği (Figure 5) Gelecek]
+                <img src="result/Figure_5_Clusters.png" alt="K-Means 4 Clusters Scatter Plot">
                 <div class="caption">Figure 5: Scatter plot representing the final 4-cluster model output.</div>
-            </div>
-
-            <div class="image-box">
-                [Buraya K-Means Liste Terminal Çıktısı (Figure 6) Gelecek]
-                <div class="caption">Figure 6: Python output listing the top TV series classified under each cluster group.</div>
             </div>
         </div>
 
@@ -165,7 +156,7 @@
     </div>
 
     <footer>
-        <p>Sabancı University | DSA210 Course | Spring 2026</p>
+        <p>Sabancı University | DSA210 Course | Spring 2024</p>
         <p>References: IMDb Datasets, Python (pandas, scikit-learn, scipy.stats), Gemini AI Assistant</p>
     </footer>
 
