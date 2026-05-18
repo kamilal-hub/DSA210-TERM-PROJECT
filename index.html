@@ -266,6 +266,16 @@
             font-weight: 800;
         }
 
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--imdb-yellow);
+            padding-left: 10px;
+        }
+
         h2 i {
             font-size: 24px;
             background: rgba(245, 197, 24, 0.1);
@@ -360,7 +370,7 @@
             box-shadow: 0 0 25px var(--imdb-yellow-glow);
         }
 
-        .cluster-card h3 {
+        .cluster-card h4 {
             font-family: 'Poppins', sans-serif;
             font-size: 18px;
             color: var(--text-main);
@@ -370,7 +380,7 @@
             gap: 10px;
         }
 
-        .cluster-card h3 i {
+        .cluster-card h4 i {
             color: var(--imdb-yellow);
         }
 
@@ -411,7 +421,7 @@
             <li><a href="#overview">Overview</a></li>
             <li><a href="#eda">EDA</a></li>
             <li><a href="#hypothesis">Testing</a></li>
-            <li><a href="#clustering">Clustering</a></li>
+            <li><a href="#machinelearning">ML Models</a></li>
             <li><a href="#conclusion">Conclusion</a></li>
         </ul>
     </nav>
@@ -475,44 +485,60 @@
                 <li>
                     <i class="fa-solid fa-circle-check"></i>
                     <strong>Classic vs. Modern Popularity (Mann-Whitney U Test):</strong> 
-                    Output is p-value = <code>0.012</code>. Modern series (2017 and newer) possess a statistically significant larger audience volume (numVotes) compared to classic shows, reflecting the global streaming boom.
+                    Output is p-value = <code>0.012</code>. Modern series (2017 and newer) possess a statistically significant larger audience volume compared to classic shows, reflecting the global streaming boom.
                 </li>
             </ul>
         </div>
 
-        <div class="section" id="clustering">
-            <h2><i class="fa-solid fa-brain"></i>4. Machine Learning (K-Means Clustering)</h2>
-            <p>Using unsupervised machine learning, I segmented the TV landscape into 4 distinct profiles. The Elbow Method indicated that <code>k=4</code> was the optimal number of clusters for this feature space.</p>
+        <div class="section" id="machinelearning">
+            <h2><i class="fa-solid fa-brain"></i>4. Machine Learning Models</h2>
+            <p>To dive deeper into the data, I implemented both Unsupervised and Supervised Machine Learning algorithms to identify hidden profiles and test predictability.</p>
+            
+            <h3>4.1 Unsupervised Learning: K-Means Clustering</h3>
+            <p>Using K-Means, I segmented the TV landscape into distinct profiles. The Elbow Method indicated that <code>k=4</code> was the optimal number of clusters for this feature space.</p>
             
             <div class="image-box">
                 <img src="result/Figure_4_Elbow_Method.png" alt="Elbow Method Graph">
                 <div class="caption"><i class="fa-solid fa-image"></i> Figure 4: Elbow method metric plot used to determine the optimal number of clusters (k=4).</div>
             </div>
 
-            <p>The algorithm successfully divided the dataset into 4 distinct real-world ecosystem profiles:</p>
+            <p>The algorithm successfully divided the dataset into 4 distinct real-world ecosystem profiles without human labeling:</p>
             
             <div class="cluster-grid">
                 <div class="cluster-card">
-                    <h3><i class="fa-solid fa-crown"></i> Cluster 3: Mega Phenomena</h3>
+                    <h4><i class="fa-solid fa-crown"></i> Cluster 3: Mega Phenomena</h4>
                     <p>Exceptional technical quality coupled with massive, outlying vote counts. <em>(e.g., Game of Thrones, Breaking Bad)</em></p>
                 </div>
                 <div class="cluster-card">
-                    <h3><i class="fa-solid fa-fire"></i> Cluster 0: Mainstream Hits</h3>
+                    <h4><i class="fa-solid fa-fire"></i> Cluster 0: Mainstream Hits</h4>
                     <p>High-quality, widely watched series comfortably crossing the standard popularity thresholds. <em>(e.g., The Boys, Sherlock)</em></p>
                 </div>
                 <div class="cluster-card">
-                    <h3><i class="fa-solid fa-gem"></i> Cluster 2: Hidden Gems</h3>
-                    <p>Critically acclaimed masterpieces boasting elite ratings, but watched by smaller, highly niche audiences. <em>(e.g., Succession, Severance)</em></p>
+                    <h4><i class="fa-solid fa-gem"></i> Cluster 2: Hidden Gems</h4>
+                    <p>Critically acclaimed masterpieces boasting elite ratings, but watched by highly niche audiences. <em>(e.g., Succession, Severance)</em></p>
                 </div>
                 <div class="cluster-card">
-                    <h3><i class="fa-solid fa-film"></i> Cluster 1: Popcorn Entertainment</h3>
-                    <p>Shows securing massive commercial popularity and viewership despite lower or average critical reviews. <em>(e.g., The Flash, Arrow)</em></p>
+                    <h4><i class="fa-solid fa-film"></i> Cluster 1: Popcorn Entertainment</h4>
+                    <p>Shows securing massive commercial popularity despite lower or average critical reviews. <em>(e.g., The Flash, Arrow)</em></p>
                 </div>
             </div>
 
             <div class="image-box">
                 <img src="result/Figure_5_Clusters.png" alt="K-Means 4 Clusters Scatter Plot">
                 <div class="caption"><i class="fa-solid fa-image"></i> Figure 5: Multi-dimensional scatter plot representing the final 4-cluster machine learning output.</div>
+            </div>
+
+            <h3>4.2 Supervised Learning: Logistic Regression</h3>
+            <p>To further test if rating alone can dictate popularity, I built a Logistic Regression model to predict whether a show would be "Popular" (above median votes) based solely on its <code>averageRating</code> and <code>startYear</code>.</p>
+            
+            <ul>
+                <li><i class="fa-solid fa-bullseye"></i> <strong>Model Accuracy:</strong> The model achieved an accuracy of <strong>68.0%</strong>.</li>
+                <li><i class="fa-solid fa-lightbulb"></i> <strong>Interpretation:</strong> This 68% accuracy is the perfect statistical narrative for this project. It means that while high ratings do increase the odds of popularity, a massive 32% of TV series defy this logic. The confusion matrix below visualizes these anomalies: the false positives and false negatives correspond exactly to our "Hidden Gems" (great rating, low audience) and "Popcorn Hits" (average rating, huge audience). Quality helps, but it is not a perfect predictor.</li>
+            </ul>
+
+            <div class="image-box">
+                <img src="result/Figure_6_Logistic_Regression.png" alt="Logistic Regression Confusion Matrix">
+                <div class="caption"><i class="fa-solid fa-image"></i> Figure 6: Confusion Matrix showing true predictions vs. anomalies (False Positives/Negatives).</div>
             </div>
         </div>
 
@@ -522,14 +548,12 @@
             
             <p style="margin-top: 15px;"><strong>Core Takeaways:</strong></p>
             <ul>
-                <li><i class="fa-solid fa-check"></i><strong>Correlation is Not Causation:</strong> With a weak 0.30 correlation, we have proven that while a great rating (9.0+) helps, it is <em>not</em> the single driver of popularity. Marketing, accessibility, and genre likely play massive roles.</li>
-                <li><i class="fa-solid fa-check"></i><strong>The "Hidden Gems" Segment:</strong> The algorithmic discovery of Cluster 2 (high rating, lower audience) mathematically validates the existence of prestige niche shows that are beloved by critics but do not achieve mainstream dominance.</li>
+                <li><i class="fa-solid fa-check"></i><strong>Correlation is Not Causation:</strong> With a weak 0.30 correlation and a 68% predictive accuracy, we have proven that while a great rating helps, it is <em>not</em> the single driver of popularity. Marketing, accessibility, and genre play massive roles.</li>
+                <li><i class="fa-solid fa-check"></i><strong>The "Hidden Gems" Segment:</strong> The algorithmic discovery of Cluster 2 mathematically validates the existence of prestige niche shows that are beloved by critics but do not achieve mainstream dominance.</li>
                 <li><i class="fa-solid fa-check"></i><strong>The Decline of Newer Series:</strong> The T-Test outcome confirming that older series have significantly higher average ratings suggests a potential shifting standard in both television production and user rating behavior over time.</li>
             </ul>
 
-            <p style="margin-top: 15px;">Ultimately, this investigation shows that the TV landscape is far more nuanced than "good equals popular." This has implications for streaming platforms (how they recommend), creators (defining success beyond raw numbers), and audiences (discovering quality outside the mainstream anomalies).</p>
-
-            <p style="margin-top: 15px;"><strong>Future Directions:</strong> While successful, this project could be expanded by integrating additional data like **streaming hours**, **marketing budget data**, and **detailed genre analysis** to further decipher what drives a show from being a critically acclaimed "Hidden Gem" into a global "Mega Phenomenon."</p>
+            <p style="margin-top: 15px;">Ultimately, this investigation shows that the TV landscape is far more nuanced than "good equals popular."</p>
         </div>
 
     </div>
