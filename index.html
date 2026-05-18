@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA210 | TV Series Analysis - Kamil Al</title>
+    <title>DSA210 | TV Series Analysis - Kamil</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -13,7 +13,8 @@
         /* Modern & Premium IMDb Esintili Tema */
         :root {
             --imdb-yellow: #f5c518;
-            --imdb-yellow-glow: #f8d347;
+            --imdb-yellow-glow: rgba(245, 197, 24, 0.5);
+            --imdb-yellow-glow-strong: rgba(245, 197, 24, 0.8);
             --bg-dark: #0b0b0d;
             --card-bg: #18181c;
             --card-hover: #22222a;
@@ -92,16 +93,15 @@
             background: rgba(245, 197, 24, 0.08);
         }
 
-        /* HERO GİRİŞ BÖLÜMÜ */
+        /* HERO GİRİŞ BÖLÜMÜ (ENHANCED WITH PROFILE CARD) */
         .hero {
-            height: 75vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 0 20px;
-            margin-top: 60px;
             background: radial-gradient(circle at center, rgba(245, 197, 24, 0.12) 0%, rgba(11, 11, 13, 1) 70%);
             position: relative;
         }
@@ -111,8 +111,53 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100px;
+            height: 150px;
             background: linear-gradient(transparent, var(--bg-dark));
+        }
+
+        /* PROFILE CARD INTEGRATION */
+        .profile-card {
+            background: rgba(24, 24, 28, 0.6);
+            border-radius: 100px;
+            padding: 10px 30px 10px 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 2px solid rgba(245, 197, 24, 0.2);
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--imdb-yellow);
+            box-shadow: 0 0 15px var(--imdb-yellow-glow-strong);
+        }
+
+        .profile-text-group {
+            text-align: left;
+        }
+
+        .profile-card .author {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            color: var(--text-main);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .profile-card .author span {
+            color: var(--imdb-yellow);
+        }
+
+        .profile-card .title {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
         .hero-tag {
@@ -120,7 +165,7 @@
             font-weight: 800;
             letter-spacing: 3px;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             margin-bottom: 15px;
             background: rgba(245, 197, 24, 0.1);
             padding: 6px 16px;
@@ -151,18 +196,34 @@
             margin-top: 25px;
         }
 
-        .hero .author {
-            margin-top: 30px;
-            font-size: 15px;
-            color: var(--text-main);
-            font-weight: 500;
+        /* SCROLL DOWN INDICATOR (SURPRISE FEATURE) */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 10px;
+            color: rgba(245, 197, 24, 0.6);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 10;
+            animation: bounce 2s infinite;
         }
 
-        .hero .author i {
-            color: var(--imdb-yellow);
+        .scroll-down i {
+            font-size: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
         }
 
         /* ANA İÇERİK KONTEYNERI */
@@ -296,7 +357,7 @@
             transform: translateY(-5px);
             background: var(--card-hover);
             border-color: rgba(245, 197, 24, 0.2);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 0 25px var(--imdb-yellow-glow);
         }
 
         .cluster-card h3 {
@@ -347,9 +408,12 @@
         /* MOBİL UYUMLULUK RESPONSIVE */
         @media (max-width: 768px) {
             nav { padding: 15px 5%; }
-            nav ul { gap: 15px; }
-            nav ul li a { font-size: 12px; padding: 4px 6px; }
+            nav ul { gap: 10px; }
+            nav ul li a { font-size: 11px; padding: 4px 5px; letter-spacing: 0; }
             .hero h1 { font-size: 40px; }
+            .profile-card { padding: 8px 15px; border-radius: 50px; }
+            .profile-card img { width: 50px; height: 50px; }
+            .profile-card .author { font-size: 16px; }
             .section { padding: 25px; }
             .cluster-grid { grid-template-columns: 1fr; }
         }
@@ -369,12 +433,23 @@
     </nav>
 
     <div class="hero">
-        <span class="hero-tag">DSA210 Term Project</span>
+        
+        <div class="profile-card">
+            <img src="image_8cf46f.jpg" alt="Kamil Student Profile Photo">
+            <div class="profile-text-group">
+                <div class="author"><span>Kamil</span> Bey</div>
+                <div class="title">Sabancı University DSA210 Student</div>
+            </div>
+        </div>
+
+        <span class="hero-tag">DSA210 Term Project • Spring 2024</span>
         <h1>TV Series Analysis: <span>Quality vs. Popularity</span></h1>
         <p>A statistical and machine learning exploration deciphering if critical acclaim directly converts to global mass-market audience volume.</p>
-        <div class="author">
-            <i class="fa-solid fa-user-astronaut"></i> Prepared by: <strong>Kamil</strong>
-        </div>
+        
+        <a href="#overview" class="scroll-down">
+            Scroll Down
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
     </div>
 
     <div class="container">
@@ -453,8 +528,19 @@
         </div>
 
         <div class="section" id="conclusion">
-            <h2><i class="fa-solid fa-flag-checkered"></i>5. Conclusion</h2>
-            <p>This project successfully demonstrated how unsupervised machine learning and statistical testing apply to the entertainment industry. The most fascinating finding was how the K-Means algorithm naturally discovered the "Hidden Gems" and "Popcorn Entertainment" categories purely from raw numerical data, without human bias.</p>
+            <h2><i class="fa-solid fa-flag-checkered"></i>5. Conclusion & Reflections</h2>
+            <p>This project successfully applied a combination of statistical validation and machine learning to map the relationship between critical quality and mainstream popularity in television.</p>
+            
+            <p style="margin-top: 15px;"><strong>Core Takeaways:</strong></p>
+            <ul>
+                <li><i class="fa-solid fa-check"></i><strong>Correlation is Not Causation:</strong> With a weak 0.30 correlation, we have proven that while a great rating (9.0+) helps, it is <em>not</em> the single driver of popularity. Marketing, accessibility, and genre likely play massive roles.</li>
+                <li><i class="fa-solid fa-check"></i><strong>The "Hidden Gems" Segment:</strong> The algorithmic discovery of Cluster 2 (high rating, lower audience) mathematically validates the existence of prestige niche shows that are beloved by critics but do not achieve mainstream dominance.</li>
+                <li><i class="fa-solid fa-check"></i><strong>The Decline of Newer Series:</strong> The T-Test outcome confirming that older series have significantly higher average ratings suggests a potential shifting standard in both television production and user rating behavior over time.</li>
+            </ul>
+
+            <p style="margin-top: 15px;">Ultimately, this investigation shows that the TV landscape is far more nuanced than "good equals popular." This has implications for streaming platforms (how they recommend), creators (defining success beyond raw numbers), and audiences (discovering quality outside the mainstream anomalies).</p>
+
+            <p style="margin-top: 15px;"><strong>Future Directions:</strong> While successful, this project could be expanded by integrating additional data like **streaming hours**, **marketing budget data**, and **detailed genre analysis** to further decipher what drives a show from being a critically acclaimed "Hidden Gem" into a global "Mega Phenomenon."</p>
         </div>
 
     </div>
