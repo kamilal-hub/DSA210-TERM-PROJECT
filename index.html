@@ -3,161 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSA210 | TV Series Analysis - Kamil</title>
+    <title>DSA210 | TV Series Analysis - Kamil Al</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* IMDb Teması (Sarı ve Siyah) */
-        body { 
-            background-color: #121212; 
-            color: #ffffff; 
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
+        /* Modern & Premium IMDb Esintili Tema */
+        :root {
+            --imdb-yellow: #f5c518;
+            --imdb-yellow-glow: #f8d347;
+            --bg-dark: #0b0b0d;
+            --card-bg: #18181c;
+            --card-hover: #22222a;
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px; /* Menü yüksekliği kadar boşluk bırakır */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        header { 
-            background-color: #f5c518; /* IMDb Sarısı */
-            color: #000000; 
-            padding: 40px 20px; 
-            text-align: center; 
-            border-bottom: 4px solid #333;
+
+        /* SABİT ÜST MENÜ (STICKY NAV) */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 11, 13, 0.92);
+            backdrop-filter: blur(10px);
+            padding: 15px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(245, 197, 24, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
-        header h1 { 
-            margin: 0; 
-            font-size: 2.5em; 
-            text-transform: uppercase;
+
+        nav .logo {
+            font-family: 'Poppins', sans-serif;
+            background: var(--imdb-yellow);
+            color: #000000;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 20px;
             font-weight: 900;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(245, 197, 24, 0.3);
         }
-        header p { 
-            margin: 10px 0 0 0; 
-            font-size: 1.2em; 
-            font-weight: bold;
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
         }
-        .container { 
-            max-width: 900px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-        }
-        .section { 
-            background-color: #1e1e1e; 
-            margin-bottom: 30px; 
-            padding: 30px; 
-            border-radius: 8px; 
-            border-left: 6px solid #f5c518; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-        h2 { 
-            color: #f5c518; 
-            margin-top: 0; 
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
-        ul { 
-            margin-top: 10px; 
-        }
-        li { 
-            margin-bottom: 10px; 
-        }
-        .image-box { 
-            background-color: #000; 
-            border: 1px solid #333; 
-            border-radius: 8px; 
-            padding: 20px; 
-            margin: 20px 0; 
-            text-align: center; 
-        }
-        /* Resimlerin ekrana tam sığması için */
-        .image-box img { 
-            max-width: 100%; 
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
             border-radius: 4px;
-            border: 1px solid #444;
         }
-        .caption { 
-            color: #888; 
-            font-size: 0.9em; 
-            margin-top: 10px; 
-            font-style: italic; 
+
+        nav ul li a:hover {
+            color: var(--imdb-yellow);
+            background: rgba(245, 197, 24, 0.08);
         }
-        footer { 
-            text-align: center; 
-            padding: 30px; 
-            font-size: 0.9em; 
-            color: #777; 
-            background-color: #0a0a0a;
-            border-top: 1px solid #222; 
-            margin-top: 50px; 
+
+        /* HERO GİRİŞ BÖLÜMÜ */
+        .hero {
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+            background: radial-gradient(circle at center, rgba(245, 197, 24, 0.12) 0%, rgba(11, 11, 13, 1) 70%);
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--bg-dark));
+        }
+
+        .hero-tag {
+            color: var(--imdb-yellow);
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 13px;
+            margin-bottom: 15px;
+            background: rgba(245, 197, 24, 0.1);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(245, 197, 24, 0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--imdb-yellow), var(--imdb-yellow-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            color: var(--text-muted);
+            margin-top: 25px;
+        }
+
+        .hero .author {
+            margin-top: 30px;
+            font-size: 15px;
+            color: var(--text-main);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero .author i {
+            color: var(--imdb-yellow);
+        }
+
+        /* ANA İÇERİK KONTEYNERI */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        /* MODERN BÖLÜM (SECTION) TASARIMI */
+        .section {
+            background-color: var(--card-bg);
+            margin-bottom: 40px;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--imdb-yellow), transparent);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            color: var(--imdb-yellow);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 800;
+        }
+
+        h2 i {
+            font-size: 24px;
+            background: rgba(245, 197, 24, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* LİSTELER */
+        ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--imdb-yellow);
+            font-size: 16px;
+        }
+
+        li strong {
+            color: var(--text-main);
+        }
+
+        /* GÖRSEL KUTULARI (IMAGE BOX) */
+        .image-box {
+            background-color: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: inset 0 4px 20px rgba(0,0,0,0.8);
+            transition: border-color 0.3s ease;
+        }
+
+        .image-box:hover {
+            border-color: rgba(245, 197, 24, 0.3);
+        }
+
+        .image-box img {
+            max-width: 100%;
+            border-radius: 6px;
+            border: 1px solid #222;
+        }
+
+        .caption {
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-top: 15px;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* KÜME KARTLARI GRİD YAPISI */
+        .cluster-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .cluster-card {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .cluster-card:hover {
+            transform: translateY(-5px);
+            background: var(--card-hover);
+            border-color: rgba(245, 197, 24, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .cluster-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cluster-card h3 i {
+            color: var(--imdb-yellow);
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+            color: var(--text-muted);
+            background-color: #050507;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        .footer-tools {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--imdb-yellow);
+        }
+
+        .footer-tools span {
+            background: rgba(245, 197, 24, 0.08);
+            padding: 4px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 197, 24, 0.15);
+        }
+
+        /* MOBİL UYUMLULUK RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            nav ul { gap: 15px; }
+            nav ul li a { font-size: 12px; padding: 4px 6px; }
+            .hero h1 { font-size: 40px; }
+            .section { padding: 25px; }
+            .cluster-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>TV Series Analysis</h1>
-        <p>Quality vs. Popularity | DSA210 Term Project by Kamil</p>
-    </header>
+    <nav>
+        <div class="logo">IMDb DATA</div>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#eda">EDA</a></li>
+            <li><a href="#hypothesis">Testing</a></li>
+            <li><a href="#clustering">Clustering</a></li>
+            <li><a href="#conclusion">Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <span class="hero-tag">DSA210 Term Project</span>
+        <h1>TV Series Analysis: <span>Quality vs. Popularity</span></h1>
+        <p>A statistical and machine learning exploration deciphering if critical acclaim directly converts to global mass-market audience volume.</p>
+        <div class="author">
+            <i class="fa-solid fa-user-astronaut"></i> Prepared by: <strong>Kamil</strong>
+        </div>
+    </div>
 
     <div class="container">
         
-        <div class="section">
-            <h2>1. Overview & Motivation</h2>
+        <div class="section" id="overview">
+            <h2><i class="fa-solid fa-compass"></i>1. Overview & Motivation</h2>
             <p>The main goal of this project is to investigate the relationship between the quality of a TV series and its mainstream popularity. It is often assumed that high-quality content automatically attracts a larger audience. I tested this assumption using real data by analyzing whether a higher IMDb rating correlates with a larger audience size (number of votes).</p>
         </div>
 
-        <div class="section">
-            <h2>2. Exploratory Data Analysis (EDA)</h2>
-            <p>The ratings show a nearly normal distribution centered around 7.5 to 8.5, indicating a high baseline quality for the selected series. However, the audience size distribution is heavily right-skewed, meaning that while most shows have a moderate audience, a few mega-hits pull in millions of votes.</p>
+        <div class="section" id="eda">
+            <h2><i class="fa-solid fa-chart-simple"></i>2. Exploratory Data Analysis (EDA)</h2>
+            <p>The ratings show a nearly normal distribution centered around 7.5 to 8.5, indicating a high baseline quality for the selected series. However, the audience size distribution is heavily right-skewed, meaning that while most shows have a moderate audience, a few mega-hits pull in millions of votes as global anomalies.</p>
             
             <div class="image-box">
                 <img src="result/Figure_1_Scatter_Plot.png" alt="IMDb Rating vs Audience Size Scatter Plot">
-                <div class="caption">Figure 1: Scatter plot showing the weak linear relationship between IMDb ratings and total user votes.</div>
+                <div class="caption"><i class="fa-solid fa-image"></i> Figure 1: Scatter plot showing the weak linear relationship between IMDb ratings and total user votes.</div>
             </div>
 
             <div class="image-box">
                 <img src="result/Figure_2_Distributions_Heatmap.png" alt="Distribution Histograms and Correlation Heatmap">
-                <div class="caption">Figure 2: Distribution histograms of ratings and votes alongside the overall correlation heatmap.</div>
+                <div class="caption"><i class="fa-solid fa-image"></i> Figure 2: Distribution histograms of ratings and votes alongside the overall correlation heatmap.</div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>3. Hypothesis Testing</h2>
+        <div class="section" id="hypothesis">
+            <h2><i class="fa-solid fa-flask"></i>3. Hypothesis Testing</h2>
+            <p>To confirm visual trends with pure mathematical certainty, I deployed two primary statistical computations:</p>
             <ul>
-                <li><strong>Rating vs. Audience Size (Pearson Correlation):</strong> Output is 0.30 (p-value = 0.000). There is a statistically significant but weak positive correlation. High ratings help, but do not guarantee mass popularity.</li>
-                <li><strong>Classic vs. Modern Series (T-Test):</strong> The p-value is 0.005. Older shows (&lt; 2017) have a significantly higher average rating (8.17) than modern shows (7.94).</li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <strong>Rating vs. Audience Size (Pearson Correlation):</strong> 
+                    Output is <code>0.30</code> (p-value = 0.000). There is a statistically significant but weak positive correlation. High ratings help, but do not guarantee mass popularity.
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <strong>Classic vs. Modern Series (Independent T-Test):</strong> 
+                    The p-value is <code>0.005</code>. Older shows (&lt; 2017) have a significantly higher average rating (8.17) than modern series (7.94).
+                </li>
             </ul>
         </div>
 
-        <div class="section">
-            <h2>4. Machine Learning (K-Means Clustering)</h2>
-            <p>Using unsupervised learning, I segmented the TV landscape into 4 distinct profiles. The Elbow Method indicated that k=4 was the optimal number of clusters.</p>
+        <div class="section" id="clustering">
+            <h2><i class="fa-solid fa-brain"></i>4. Machine Learning (K-Means Clustering)</h2>
+            <p>Using unsupervised machine learning, I segmented the TV landscape into 4 distinct profiles. The Elbow Method indicated that <code>k=4</code> was the optimal number of clusters for this feature space.</p>
             
             <div class="image-box">
                 <img src="result/Figure_4_Elbow_Method.png" alt="Elbow Method Graph">
-                <div class="caption">Figure 4: Elbow method metric plot used to determine the optimal number of clusters (k=4).</div>
+                <div class="caption"><i class="fa-solid fa-image"></i> Figure 4: Elbow method metric plot used to determine the optimal number of clusters (k=4).</div>
             </div>
 
-            <p>The algorithm successfully divided the TV series into 4 distinct real-world profiles:</p>
-            <ul>
-                <li><strong>Cluster 3 (The Mega-Phenomena):</strong> E.g., Game of Thrones. Exceptional quality and massive votes.</li>
-                <li><strong>Cluster 0 (Mainstream Masterpieces):</strong> E.g., The Boys. High-quality, widely watched series.</li>
-                <li><strong>Cluster 2 (Hidden Gems):</strong> E.g., Succession. Critically acclaimed but smaller, niche audiences.</li>
-                <li><strong>Cluster 1 (Popcorn Entertainment):</strong> E.g., The Flash. High popularity but average critical ratings.</li>
-            </ul>
+            <p>The algorithm successfully divided the dataset into 4 distinct real-world ecosystem profiles:</p>
+            
+            <div class="cluster-grid">
+                <div class="cluster-card">
+                    <h3><i class="fa-solid fa-crown"></i> Cluster 3: Mega Phenomena</h3>
+                    <p>Exceptional technical quality coupled with massive, outlying vote counts. <em>(e.g., Game of Thrones, Breaking Bad)</em></p>
+                </div>
+                <div class="cluster-card">
+                    <h3><i class="fa-solid fa-fire"></i> Cluster 0: Mainstream Hits</h3>
+                    <p>High-quality, widely watched series comfortably crossing the standard popularity thresholds. <em>(e.g., The Boys, Sherlock)</em></p>
+                </div>
+                <div class="cluster-card">
+                    <h3><i class="fa-solid fa-gem"></i> Cluster 2: Hidden Gems</h3>
+                    <p>Critically acclaimed masterpieces boasting elite ratings, but watched by smaller, highly niche audiences. <em>(e.g., Succession, Severance)</em></p>
+                </div>
+                <div class="cluster-card">
+                    <h3><i class="fa-solid fa-film"></i> Cluster 1: Popcorn Entertainment</h3>
+                    <p>Shows securing massive commercial popularity and viewership despite lower or average critical reviews. <em>(e.g., The Flash, Arrow)</em></p>
+                </div>
+            </div>
 
             <div class="image-box">
                 <img src="result/Figure_5_Clusters.png" alt="K-Means 4 Clusters Scatter Plot">
-                <div class="caption">Figure 5: Scatter plot representing the final 4-cluster model output.</div>
+                <div class="caption"><i class="fa-solid fa-image"></i> Figure 5: Multi-dimensional scatter plot representing the final 4-cluster machine learning output.</div>
             </div>
         </div>
 
-        <div class="section">
-            <h2>5. Conclusion</h2>
-            <p>This project successfully demonstrated how unsupervised machine learning and statistical testing apply to the entertainment industry. The most fascinating finding was how the K-Means algorithm naturally discovered the "Hidden Gems" and "Popcorn Entertainment" categories purely from raw numerical data.</p>
+        <div class="section" id="conclusion">
+            <h2><i class="fa-solid fa-flag-checkered"></i>5. Conclusion</h2>
+            <p>This project successfully demonstrated how unsupervised machine learning and statistical testing apply to the entertainment industry. The most fascinating finding was how the K-Means algorithm naturally discovered the "Hidden Gems" and "Popcorn Entertainment" categories purely from raw numerical data, without human bias.</p>
         </div>
 
     </div>
 
     <footer>
-        <p>Sabancı University | DSA210 Course | Spring 2024</p>
-        <p>References: IMDb Datasets, Python (pandas, scikit-learn, scipy.stats), Gemini AI Assistant</p>
+        <p>Sabancı University | DSA210 Introduction to Data Science | Spring 2024</p>
+        <div class="footer-tools">
+            <span><i class="fa-solid fa-database"></i> IMDb Metadata</span>
+            <span><i class="fa-brands fa-python"></i> Python Sklearn</span>
+            <span><i class="fa-solid fa-robot"></i> Gemini AI Assistant</span>
+        </div>
     </footer>
 
 </body>
