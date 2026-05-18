@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA210 | TV Series Analysis - Kamil</title>
+    <style>
+        /* IMDb Teması (Sarı ve Siyah) */
+        body { 
+            background-color: #121212; 
+            color: #ffffff; 
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+        }
+        header { 
+            background-color: #f5c518; /* IMDb Sarısı */
+            color: #000000; 
+            padding: 40px 20px; 
+            text-align: center; 
+            border-bottom: 4px solid #333;
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.5em; 
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+        header p { 
+            margin: 10px 0 0 0; 
+            font-size: 1.2em; 
+            font-weight: bold;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+        .section { 
+            background-color: #1e1e1e; 
+            margin-bottom: 30px; 
+            padding: 30px; 
+            border-radius: 8px; 
+            border-left: 6px solid #f5c518; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        h2 { 
+            color: #f5c518; 
+            margin-top: 0; 
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        ul { 
+            margin-top: 10px; 
+        }
+        li { 
+            margin-bottom: 10px; 
+        }
+        .image-box { 
+            background-color: #000; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 20px 0; 
+            text-align: center; 
+        }
+        /* Resimlerin ekrana tam sığması için */
+        .image-box img { 
+            max-width: 100%; 
+            border-radius: 4px;
+        }
+        .caption { 
+            color: #888; 
+            font-size: 0.9em; 
+            margin-top: 10px; 
+            font-style: italic; 
+        }
+        footer { 
+            text-align: center; 
+            padding: 30px; 
+            font-size: 0.9em; 
+            color: #777; 
+            background-color: #0a0a0a;
+            border-top: 1px solid #222; 
+            margin-top: 50px; 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TV Series Analysis</h1>
+        <p>Quality vs. Popularity | DSA210 Term Project by Kamil</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="section">
+            <h2>1. Overview & Motivation</h2>
+            <p>The main goal of this project is to investigate the relationship between the quality of a TV series and its mainstream popularity. It is often assumed that high-quality content automatically attracts a larger audience. I tested this assumption using real data by analyzing whether a higher IMDb rating correlates with a larger audience size (number of votes).</p>
+        </div>
+
+        <div class="section">
+            <h2>2. Exploratory Data Analysis (EDA)</h2>
+            <p>The ratings show a nearly normal distribution centered around 7.5 to 8.5, indicating a high baseline quality for the selected series. However, the audience size distribution is heavily right-skewed, meaning that while most shows have a moderate audience, a few mega-hits pull in millions of votes.</p>
+            
+            <div class="image-box">
+                [Buraya Scatter Plot (Figure 1) Gelecek]
+                <div class="caption">Figure 1: Scatter plot showing the weak linear relationship between IMDb ratings and total user votes.</div>
+            </div>
+
+            <div class="image-box">
+                [Buraya Histogram ve Heatmap (Figure 2) Gelecek]
+                <div class="caption">Figure 2: Distribution histograms of ratings and votes alongside the overall correlation heatmap.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Hypothesis Testing</h2>
+            <ul>
+                <li><strong>Rating vs. Audience Size (Pearson Correlation):</strong> Output is 0.30 (p-value = 0.000). There is a statistically significant but weak positive correlation. High ratings help, but do not guarantee mass popularity.</li>
+                <li><strong>Classic vs. Modern Series (T-Test):</strong> The p-value is 0.005. Older shows (< 2017) have a significantly higher average rating (8.17) than modern shows (7.94).</li>
+            </ul>
+
+            <div class="image-box">
+                [Buraya Test Çıktıları Terminal SS'i (Figure 3) Gelecek]
+                <div class="caption">Figure 3: Python terminal output displaying the results and p-values for both hypothesis tests.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. Machine Learning (K-Means Clustering)</h2>
+            <p>Using unsupervised learning, I segmented the TV landscape into 4 distinct profiles. The Elbow Method indicated that k=4 was the optimal number of clusters.</p>
+            
+            <div class="image-box">
+                [Buraya Elbow Method Grafiği (Figure 4) Gelecek]
+                <div class="caption">Figure 4: Elbow method metric plot used to determine the optimal number of clusters (k=4).</div>
+            </div>
+
+            <p>The algorithm successfully divided the TV series into 4 distinct real-world profiles:</p>
+            <ul>
+                <li><strong>Cluster 3 (The Mega-Phenomena):</strong> E.g., Game of Thrones. Exceptional quality and massive votes.</li>
+                <li><strong>Cluster 0 (Mainstream Masterpieces):</strong> E.g., The Boys. High-quality, widely watched series.</li>
+                <li><strong>Cluster 2 (Hidden Gems):</strong> E.g., Succession. Critically acclaimed but smaller, niche audiences.</li>
+                <li><strong>Cluster 1 (Popcorn Entertainment):</strong> E.g., The Flash. High popularity but average critical ratings.</li>
+            </ul>
+
+            <div class="image-box">
+                [Buraya 4 Renkli K-Means Grafiği (Figure 5) Gelecek]
+                <div class="caption">Figure 5: Scatter plot representing the final 4-cluster model output.</div>
+            </div>
+
+            <div class="image-box">
+                [Buraya K-Means Liste Terminal Çıktısı (Figure 6) Gelecek]
+                <div class="caption">Figure 6: Python output listing the top TV series classified under each cluster group.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>5. Conclusion</h2>
+            <p>This project successfully demonstrated how unsupervised machine learning and statistical testing apply to the entertainment industry. The most fascinating finding was how the K-Means algorithm naturally discovered the "Hidden Gems" and "Popcorn Entertainment" categories purely from raw numerical data.</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>Sabancı University | DSA210 Course | Spring 2026</p>
+        <p>References: IMDb Datasets, Python (pandas, scikit-learn, scipy.stats), Gemini AI Assistant</p>
+    </footer>
+
+</body>
+</html>
