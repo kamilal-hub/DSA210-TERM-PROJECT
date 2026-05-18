@@ -21,3 +21,12 @@ In this milestone, I applied unsupervised machine learning to find hidden patter
     * Cluster 0 (Popular & High Quality):Mainstream hits with great ratings and a very large fan base (e.g., The Boys, Better Call Saul).
     * Cluster 2 (Hidden Gems):** Critically acclaimed shows with high ratings but a smaller, more niche audience (e.g., Succession, Severance).
     * Cluster 1 (Average Quality, High Popularity):Widely watched shows that have average or lower IMDb ratings (e.g., The Flash, 13 Reasons Why).
+## Final Phase: Advanced Modeling, Statistical Expansion & Web Deployment
+In the final stage of the project, the analytical depth was expanded by introducing supervised learning, non-parametric statistical validation, and a production-ready web interface.
+
+* **Hypothesis Test 3 (Popularity Shift):** Conducted a **Mann-Whitney U Test** to evaluate audience size distribution between eras. Since vote counts are heavily right-skewed, this non-parametric approach mathematically proved ($p = 0.012$) that modern series achieve significantly higher audience volumes due to the global streaming era boom.
+* **Supervised Learning (Logistic Regression):** Implemented a classification model to predict whether a series would become "Popular" (above median votes) based solely on its quality rating and release year. 
+  * Achieved a baseline **Accuracy of 68.0%**.
+  * The 32% unpredictability perfectly validates our core narrative: technical quality is an influential factor, but market anomalies like marketing, genre, and prestige "Hidden Gems" heavily diversify real-world entertainment success.
+* **Project Architecture Optimization:** Automated plot exports in the source code to gather all high-resolution figures (`.png`) inside a structured `result/` directory for cleaner version control.
+* **GitHub Pages Deployment:** Designed and launched a fully interactive project showcase website deployed live via GitHub Pages. Custom-built with a premium, responsive IMDb-inspired black and yellow theme, smooth-scrolling navigation links, personal reflections, and student profile integration.
